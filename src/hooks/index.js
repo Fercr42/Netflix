@@ -1,4 +1,4 @@
 export * from "./usePopularMovies.hook";
 export * from "./useTrendingMovies.hook";
 export * from "./useRatedMovies.hook";
-export * from "./useWatchListMovies.hook";
+export * from "./useSelectedMovie.hook";

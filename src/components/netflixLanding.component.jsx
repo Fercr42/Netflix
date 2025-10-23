@@ -1,16 +1,18 @@
 "use client";
 
 import {
-  useMovies,
+  usePopularMovies,
   useTrendingMovies,
   useRatedMovies,
   useWatchListMovies,
 } from "../hooks";
-import { useState } from "react";
+
 import { MovieSwiperComponent } from "./movieSwiper.component";
+import { SelectedMovieContext } from "@/hooks";
+import { useContext } from "react";
 
 export const NetflixLandingComponent = () => {
-  const { data: movies, isLoading, error } = useMovies();
+  const { data: movies, isLoading, error } = usePopularMovies();
   const {
     data: trendingMovies,
     isLoading: isTrendingMoviesLoading,
@@ -21,25 +23,59 @@ export const NetflixLandingComponent = () => {
     isLoading: isRatedMoviesLoading,
     error: ratedMoviesError,
   } = useRatedMovies();
-  const {
-    data: watchListMovies,
-    isLoading: isWatchListMoviesLoading,
-    error: watchListMoviesError,
-  } = useWatchListMovies();
+
+  const { selectedMovieId, isModalOpen, setIsModalOpen } =
+    useContext(SelectedMovieContext);
+
+  const allMovies = [
+    ...(movies?.results || []),
+    ...(trendingMovies?.results || []),
+    ...(ratedMovies?.results || []),
+  ];
+
+  const selectedMovie =
+    selectedMovieId && allMovies.length > 0
+      ? allMovies.find((movie) => movie.id === selectedMovieId)
+      : null;
 
   const isLoadingEverything =
-    isLoading ||
-    isTrendingMoviesLoading ||
-    isRatedMoviesLoading ||
-    isWatchListMoviesLoading;
+    isLoading || isTrendingMoviesLoading || isRatedMoviesLoading;
 
-  const isError =
-    error || trendingMoviesError || ratedMoviesError || watchListMoviesError;
-
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const isError = error || trendingMoviesError || ratedMoviesError;
 
   return (
     <div className="bg-black h-auto">
+      {isModalOpen && selectedMovie && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center">
+          <div className="max-w-4xl h-auto max-h-4xl bg-black rounded-lg relative text-white">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute  z-10 top-4 right-4 hover:text-gray-700 text-2xl font-bold text-white"
+            >
+              ×
+            </button>
+
+            <div className="relative">
+              <img
+                src={`https://image.tmdb.org/t/p/w500${selectedMovie.backdrop_path}`}
+                alt={selectedMovie.title}
+                className="w-full h-auto object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/90 to-transparent"></div>
+            </div>
+
+            <div className="relative z-10 w-full h-full ">
+              <h2 className="text-2xl font-bold text-white mb-4">
+                {selectedMovie.title}
+              </h2>
+              <p className="text-white text-md leading-relaxed">
+                {selectedMovie.overview}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {isError && (
         <div className="text-white text-4xl font-bold">
           {error?.message ||
@@ -65,11 +101,6 @@ export const NetflixLandingComponent = () => {
           />
 
           <MovieSwiperComponent title="Top Rated Movies" movies={ratedMovies} />
-
-          <MovieSwiperComponent
-            title="Watchlist Movies"
-            movies={watchListMovies}
-          />
         </div>
       )}
     </div>

@@ -15,6 +15,12 @@ export const MovieSwiperComponent = ({ title, movies, className = "" }) => {
     return null;
   }
 
+  const validMovies = movies.results.filter((movie) => movie && movie.id);
+
+  if (validMovies.length === 0) {
+    return null;
+  }
+
   return (
     <div className={`mb-8 ${className}`}>
       <h2 className="text-white text-xl font-bold mb-4 px-4">{title}</h2>
@@ -28,8 +34,11 @@ export const MovieSwiperComponent = ({ title, movies, className = "" }) => {
         scrollbar={{ draggable: true }}
         className="px-4"
       >
-        {movies.results.map((movie) => (
-          <SwiperSlide key={movie.id} className="w-[300px]!">
+        {validMovies.map((movie, index) => (
+          <SwiperSlide
+            key={`${title}-${movie.id}-${index}`}
+            className="w-[300px]!"
+          >
             <MovieCard movie={movie} />
           </SwiperSlide>
         ))}

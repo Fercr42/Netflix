@@ -3,11 +3,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { envServices } from "@/services/envServices";
 
-export const useMovies = () => {
+export const usePopularMovies = () => {
   const { apiURL, apiKey } = envServices.getApiInformation();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["movies"],
+    queryKey: ["popularMovies"],
     queryFn: async () => {
       const pages = [1, 2, 3];
       const results = await Promise.all(
