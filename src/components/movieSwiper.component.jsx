@@ -22,22 +22,22 @@ export const MovieSwiperComponent = ({ title, movies, className = "" }) => {
   }
 
   return (
-    <div className={`mb-8 ${className}`}>
-      <h2 className="text-white text-xl font-bold mb-4 px-4">{title}</h2>
+    <div className={`mb-2 ${className}`}>
+      <h2 className="text-white text-xl font-bold mb-2 px-4">{title}</h2>
 
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={6}
+        spaceBetween={0}
         slidesPerView="auto"
         navigation={true}
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
-        className="px-4"
+        className="px-2"
       >
         {validMovies.map((movie, index) => (
           <SwiperSlide
             key={`${title}-${movie.id}-${index}`}
-            className="w-[300px]!"
+            className="w-[280px]!"
           >
             <MovieCard movie={movie} />
           </SwiperSlide>

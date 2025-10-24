@@ -4,12 +4,18 @@ import {
   usePopularMovies,
   useTrendingMovies,
   useRatedMovies,
-  useWatchListMovies,
+  useMovieDetails,
 } from "../hooks";
+
+import { useEffect } from "react";
 
 import { MovieSwiperComponent } from "./movieSwiper.component";
 import { SelectedMovieContext } from "@/hooks";
 import { useContext } from "react";
+import { MovieGenresComponent } from "./movieGenres.component";
+import { MovieHeaderInfoComponent } from "./movieHeaderInfo.component";
+import { MovieBodyInfoComponent } from "./movieBodyInfo.component";
+import { MovieOverViewComponent } from "./movieOverView.component";
 
 export const NetflixLandingComponent = () => {
   const { data: movies, isLoading, error } = usePopularMovies();
@@ -24,8 +30,11 @@ export const NetflixLandingComponent = () => {
     error: ratedMoviesError,
   } = useRatedMovies();
 
-  const { selectedMovieId, isModalOpen, setIsModalOpen } =
+  const { selectedMovieId, isModalOpen, setIsModalOpen, setSelectedMovieId } =
     useContext(SelectedMovieContext);
+
+  const { data: movieDetails, isLoading: isMovieDetailsLoading } =
+    useMovieDetails(selectedMovieId);
 
   const allMovies = [
     ...(movies?.results || []),
@@ -43,35 +52,31 @@ export const NetflixLandingComponent = () => {
 
   const isError = error || trendingMoviesError || ratedMoviesError;
 
+  useEffect(() => {
+    if (selectedMovie) {
+      setSelectedMovieId(selectedMovie.id);
+    }
+  }, []);
+
   return (
     <div className="bg-black h-auto">
       {isModalOpen && selectedMovie && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center">
-          <div className="max-w-4xl h-auto max-h-4xl bg-black rounded-lg relative text-white">
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-5xl max-h-[90vh] bg-black rounded-lg relative text-white overflow-y-auto">
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute  z-10 top-4 right-4 hover:text-gray-700 text-2xl font-bold text-white"
+              className="absolute  z-50 top-4 right-0 hover:text-gray-700 text-2xl font-bold text-white"
             >
               ×
             </button>
 
-            <div className="relative">
-              <img
-                src={`https://image.tmdb.org/t/p/w500${selectedMovie.backdrop_path}`}
-                alt={selectedMovie.title}
-                className="w-full h-auto object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/90 to-transparent"></div>
-            </div>
+            <MovieHeaderInfoComponent selectedMovie={selectedMovie} />
 
-            <div className="relative z-10 w-full h-full ">
-              <h2 className="text-2xl font-bold text-white mb-4">
-                {selectedMovie.title}
-              </h2>
-              <p className="text-white text-md leading-relaxed">
-                {selectedMovie.overview}
-              </p>
-            </div>
+            <MovieBodyInfoComponent
+              selectedMovie={selectedMovie}
+              movieDetails={movieDetails}
+              isMovieDetailsLoading={isMovieDetailsLoading}
+            />
           </div>
         </div>
       )}
@@ -85,14 +90,19 @@ export const NetflixLandingComponent = () => {
         </div>
       )}
 
-      {isLoadingEverything && (
+      {selectedMovie && (
+        <MovieOverViewComponent
+          movieDetails={movieDetails}
+          selectedMovie={selectedMovie}
+        />
+      )}
+
+      {isLoadingEverything ? (
         <div className="flex items-center justify-center h-full">
           <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
-      )}
-
-      {!isLoadingEverything && (
-        <div className="space-y-8">
+      ) : (
+        <div className="space-y-2">
           <MovieSwiperComponent title="Popular on Netflix" movies={movies} />
 
           <MovieSwiperComponent
