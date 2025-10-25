@@ -36,7 +36,7 @@ export const MovieSwiperComponent = ({ title, movies, className = "" }) => {
         {validMovies.map((movie, index) => (
           <SwiperSlide
             key={`${title}-${movie.id}-${index}`}
-            className="w-[160px]! lg:w-[260px]!"
+            className="w-[160px]! sm:w-[260px]! "
           >
             <MovieCard movie={movie} />
           </SwiperSlide>
