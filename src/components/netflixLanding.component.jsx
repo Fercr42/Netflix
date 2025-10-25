@@ -53,10 +53,10 @@ export const NetflixLandingComponent = () => {
   const isError = error || trendingMoviesError || ratedMoviesError;
 
   useEffect(() => {
-    if (selectedMovie) {
-      setSelectedMovieId(selectedMovie.id);
+    if (!isLoadingEverything && !selectedMovieId) {
+      setSelectedMovieId(13);
     }
-  }, []);
+  }, [isLoadingEverything, setSelectedMovieId]);
 
   return (
     <div className="bg-black h-auto">

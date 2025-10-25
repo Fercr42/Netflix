@@ -1,6 +1,6 @@
 export const MovieOverViewComponent = ({ movieDetails, selectedMovie }) => {
   return (
-    <div className=" relative w-full flex flex-row p-2">
+    <div className=" relative w-full lg:flex  lg:flex-row p-2">
       <div className="w-full flex flex-col">
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
           {selectedMovie.title}
@@ -20,7 +20,7 @@ export const MovieOverViewComponent = ({ movieDetails, selectedMovie }) => {
           </div>
         )}
 
-        <p className="text-sm text-gray-300 whitespace-normal break-word">
+        <p className="text-sm text-white whitespace-normal break-word">
           {selectedMovie.overview}{" "}
         </p>
 
@@ -30,7 +30,7 @@ export const MovieOverViewComponent = ({ movieDetails, selectedMovie }) => {
               {movieDetails.genres.map((genre, index) => (
                 <span
                   key={genre.id}
-                  className="font-semibold text-gray-300 text-sm"
+                  className="font-semibold text-white text-sm"
                 >
                   {genre.name}
                   {index < 2 ? ", " : ""}
@@ -44,7 +44,7 @@ export const MovieOverViewComponent = ({ movieDetails, selectedMovie }) => {
               {movieDetails?.credits?.cast?.slice(0, 3).map((cast, index) => (
                 <span
                   key={cast.id}
-                  className="font-semibold text-gray-300 text-sm"
+                  className="font-semibold text-white text-sm"
                 >
                   {cast.name}
                   {index < 2 ? ", " : ""}
