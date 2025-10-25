@@ -9,7 +9,7 @@ export const MovieCard = ({ movie }) => {
 
   return (
     <div
-      className="w-[250px] h-[150px] rounded-md overflow-hidden shrink-0 cursor-pointer hover:scale-105 transition-all duration-300"
+      className="sm:w-[250px] sm:h-[150px] w-[150px] h-[100px] rounded-md overflow-hidden shrink-0 cursor-pointer hover:scale-105 transition-all duration-300"
       onDoubleClick={() => {
         setIsModalOpen(true);
       }}
