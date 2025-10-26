@@ -1,20 +1,23 @@
 "use client";
 
 import { useContext } from "react";
-import { SelectedMovieContext } from "@/hooks";
+import { SelectedMovieContext, SelectedSeriesContext } from "@/hooks";
 
 export const MovieCard = ({ movie }) => {
-  const { setSelectedMovieId, setIsModalOpen } =
+  const { setSelectedMovieId, setIsModalMovieOpen } =
     useContext(SelectedMovieContext);
+
+  const { setSelectedSeriesId } = useContext(SelectedSeriesContext);
 
   return (
     <div
       className="sm:w-[250px] sm:h-[150px] w-[150px] h-[100px] rounded-md overflow-hidden shrink-0 cursor-pointer hover:scale-105 transition-all duration-300"
       onDoubleClick={() => {
-        setIsModalOpen(true);
+        setIsModalMovieOpen(true);
       }}
       onClick={() => {
         setSelectedMovieId(movie.id);
+        setSelectedSeriesId(null);
       }}
     >
       <img

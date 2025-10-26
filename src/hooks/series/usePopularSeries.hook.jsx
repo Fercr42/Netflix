@@ -3,17 +3,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { envServices } from "@/services/envServices";
 
-export const useTrendingMovies = () => {
+export const usePopularSeries = () => {
   const { apiURL, apiKey } = envServices.getApiInformation();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["trendingMovies"],
+    queryKey: ["popularSeries"],
     queryFn: async () => {
-      const pages = [4, 5, 6];
+      const pages = [1, 2, 3];
       const results = await Promise.all(
         pages.map(async (page) => {
           const response = await fetch(
-            `${apiURL}/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`,
+            `${apiURL}/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=popularity.desc`,
             {
               headers: {
                 Authorization: `Bearer ${apiKey}`,

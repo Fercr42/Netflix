@@ -4,15 +4,15 @@ export const SelectedMovieContext = createContext();
 
 export const SelectedMovieProvider = ({ children }) => {
   const [selectedMovieId, setSelectedMovieId] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalMovieOpen, setIsModalMovieOpen] = useState(false);
 
   return (
     <SelectedMovieContext.Provider
       value={{
         selectedMovieId,
         setSelectedMovieId,
-        isModalOpen,
-        setIsModalOpen,
+        isModalMovieOpen,
+        setIsModalMovieOpen,
       }}
     >
       {children}

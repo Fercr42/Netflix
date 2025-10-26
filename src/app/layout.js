@@ -3,7 +3,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SelectedMovieProvider } from "@/hooks";
+import { SelectedMovieProvider, SelectedSeriesProvider } from "@/hooks";
 import { useState } from "react";
 
 const geistSans = Geist({
@@ -26,11 +26,13 @@ export default function RootLayout({ children }) {
       </head>
       <QueryClientProvider client={queryClient}>
         <SelectedMovieProvider>
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            {children}
-          </body>
+          <SelectedSeriesProvider>
+            <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+              {children}
+            </body>
+          </SelectedSeriesProvider>
         </SelectedMovieProvider>
       </QueryClientProvider>
     </html>

@@ -1,4 +1,4 @@
-import { NetflixLandingComponent } from "../components/netflixLanding.component";
+import { NetflixLandingComponent } from "@/components";
 
 export default function Home() {
   return <NetflixLandingComponent />;
