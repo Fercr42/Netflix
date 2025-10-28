@@ -8,3 +8,6 @@ export * from "./movies/netflixLanding.component";
 export * from "./series/seriesSwiper.component";
 export * from "./series/seriesCard.component";
 export * from "./series/seriesOverview.component";
+export * from "./series/seriesHeaderInfo.component";
+export * from "./series/seriesBodyInfo.component";
+export * from "./series/seriesGender.component";

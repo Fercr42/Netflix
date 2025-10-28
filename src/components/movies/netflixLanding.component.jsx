@@ -9,6 +9,8 @@ import {
   SeriesSwiperComponent,
   MovieSwiperComponent,
   SeriesOverViewComponent,
+  SeriesHeaderInfoComponent,
+  SeriesBodyInfoComponent,
 } from "@/components";
 
 import {
@@ -171,6 +173,27 @@ export const NetflixLandingComponent = () => {
               selectedMovie={selectedMovie}
               movieDetails={movieDetails}
               isMovieDetailsLoading={isMovieDetailsLoading}
+            />
+          </div>
+        </div>
+      )}
+
+      {isModalSeriesOpen && selectedSeries && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-5xl max-h-[90vh] bg-black rounded-lg relative text-white overflow-y-auto">
+            <button
+              onClick={() => setIsModalSeriesOpen(false)}
+              className="absolute  z-50 top-4 right-0   hover:text-gray-700 text-2xl font-bold text-white"
+            >
+              ×
+            </button>
+
+            <SeriesHeaderInfoComponent selectedSeries={selectedSeries} />
+
+            <SeriesBodyInfoComponent
+              selectedSeries={selectedSeries}
+              seriesDetails={seriesDetails}
+              isSeriesDetailsLoading={isSeriesDetailsLoading}
             />
           </div>
         </div>
