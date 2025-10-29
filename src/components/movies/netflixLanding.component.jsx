@@ -156,7 +156,7 @@ export const NetflixLandingComponent = () => {
   ]);
 
   return (
-    <div className="bg-black h-auto">
+    <div className="bg-black h-full">
       {isModalMovieOpen && selectedMovie && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="w-full max-w-5xl max-h-[90vh] bg-black rounded-lg relative text-white overflow-y-auto">

@@ -1,12 +1,17 @@
+"use client";
+
+import { useState } from "react";
 import { useSeriesSeasonDetails } from "@/hooks/series/useSeriesSeasonDetails.hook";
 
-export const SeriesSeasonComponent = ({
-  selectedSeries,
-  seriesDetails,
-  isSeasonDetailsLoading,
-}) => {
+export const SeriesSeasonComponent = ({ selectedSeries, seriesDetails }) => {
+  const [selectedSeason, setSelectedSeason] = useState(1);
+
   const { data: seasonDetails, isLoading: isSeasonDetailsLoading } =
-    useSeriesSeasonDetails(selectedSeries.id, seriesDetails.season_number);
+    useSeriesSeasonDetails(selectedSeries.id, selectedSeason);
+
+  const handleSelectSeason = (seasonId) => {
+    setSelectedSeason(seasonId);
+  };
 
   return (
     <div>
@@ -19,21 +24,69 @@ export const SeriesSeasonComponent = ({
             </span>
           </div>
         </div>
-      ) : seasonDetails ? (
-        <div className="mt-6">
-          <div className="text-gray-400 text-sm">
-            {seasonDetails.name}
-            {seasonDetails.overview}
-            {seasonDetails.episode_count}
-            {seasonDetails.air_date}
-            {seasonDetails.poster_path}
-            {seasonDetails.backdrop_path}
-            {seasonDetails.episode_run_time}
-            {seasonDetails.vote_average}
-            {seasonDetails.vote_count}
+      ) : (
+        seasonDetails && (
+          <div className="mt-6 flex flex-row justify-between gap-4 items-center">
+            <h1>Episodes</h1>
+
+            <div className="text-gray-400 text-sm">
+              <select
+                className="p-2 rounded-md border border-gray-300 bg-gray-800 text-white"
+                value={selectedSeason}
+                onChange={(e) => handleSelectSeason(parseInt(e.target.value))}
+              >
+                {seriesDetails.seasons.map((season) => (
+                  <option
+                    key={season.season_number}
+                    value={season.season_number}
+                  >
+                    {season.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
+        )
+      )}
+
+      {seasonDetails?.episodes && (
+        <div className="flex flex-col gap-4 p-4">
+          {seasonDetails.episodes.map((episode) => (
+            <div
+              key={episode.id}
+              className="flex flex-row gap-2 bg-gray-800 w-full rounded-md p-4 items-center"
+            >
+              <span className="text-white text-sm mr-4">
+                {episode.episode_number}
+              </span>
+              <img
+                src={
+                  episode.still_path
+                    ? `https://image.tmdb.org/t/p/w500${episode.still_path}`
+                    : "/placeholder-episode.jpg"
+                }
+                alt={episode.name}
+                className="size-24 sm:w-40 sm:h-24 object-cover rounded"
+                onError={(e) => {
+                  e.target.src = "/placeholder-episode.jpg";
+                }}
+              />
+
+              <div className="flex flex-col gap-2">
+                <h2 className="text-xs xs:text-sm font-bold text-white">
+                  {episode.name}
+                </h2>
+                <p className="text-gray-400  text-sm line-clamp-3">
+                  {episode.overview}
+                </p>
+                <div className="flex justify-between items-center text-xs text-gray-500">
+                  <span>{episode.runtime} min</span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

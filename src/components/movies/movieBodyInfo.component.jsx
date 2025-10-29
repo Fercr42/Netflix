@@ -15,13 +15,13 @@ export const MovieBodyInfoComponent = ({
         <div className="mb-6 space-y-3">
           <div className="flex flex-wrap gap-4 text-sm text-gray-300">
             <span className="font-semibold bg-gray-800 px-3 py-1 rounded">
-              Year: {new Date(movieDetails.release_date).getFullYear()}
+              {new Date(movieDetails.release_date).getFullYear()}
             </span>
             <span className="font-semibold bg-gray-800 px-3 py-1 rounded">
-              Duration: {movieDetails.runtime} min
+              {movieDetails.runtime} min
             </span>
             <span className="font-semibold bg-gray-800 px-3 py-1 rounded">
-              Rating: {movieDetails.vote_average?.toFixed(1)}/10
+              {movieDetails.vote_average?.toFixed(1)}/10
             </span>
           </div>
 
@@ -29,7 +29,7 @@ export const MovieBodyInfoComponent = ({
         </div>
       )}
 
-      <p className="text-white text-md leading-relaxed mb-6">
+      <p className="text-white text-sm leading-relaxed mb-6">
         {selectedMovie.overview}
       </p>
 

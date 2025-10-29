@@ -9,7 +9,7 @@ export const MovieHeaderInfoComponent = ({ selectedMovie }) => {
 
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-linear-to-t from-black/90 to-transparent flex flex-row justify-between items-center">
         <div className="flex flex-row gap-10 ml-4 absolute bottom-4 left-4">
-          <button className="bg-white border-2 w-24 border-black text-black px-4 py-2 rounded-md flex items-center gap-2 hover:scale-105 transition-all duration-300 cursor-pointer ">
+          <button className="bg-gray-900 border-2 w-24 border-black text-white  px-4 py-2 rounded-md flex items-center gap-2 hover:scale-105 transition-all duration-300 cursor-pointer ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -22,8 +22,8 @@ export const MovieHeaderInfoComponent = ({ selectedMovie }) => {
             Play
           </button>
 
-          <div className="flex flex-row gap-2 bg-white border-2 border-black text-black px-4 py-2 rounded-md w-24 justify-center items-center hover:scale-105 transition-all duration-300 cursor-pointer">
-            <button className="hover:scale-105 transition-all duration-300 cursor-pointer">
+          <div className="flex flex-row gap-2 bg-gray-900 border-2 border-black text-white px-6 py-2 rounded-3xl w-24 justify-center items-center">
+            <button className="hover:scale-105 transition-all duration-100 hover:border-white hover:border-2 hover:rounded-full p-2 cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -35,7 +35,7 @@ export const MovieHeaderInfoComponent = ({ selectedMovie }) => {
               </svg>
             </button>
 
-            <button className="hover:scale-105 transition-all duration-300 cursor-pointer">
+            <button className="hover:scale-105 transition-all duration-300 hover:border-white hover:border-2 hover:rounded-full p-2 cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

@@ -1,7 +1,7 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { envServices } from "@/services/envServices";
+import { useQuery } from "@tanstack/react-query";
 
 export const usePopularMovies = () => {
   const { apiURL, apiKey } = envServices.getApiInformation();

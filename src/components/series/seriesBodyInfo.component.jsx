@@ -1,6 +1,6 @@
 import { SeriesGenderComponent } from "./seriesGender.component";
 
-import { useSeriesSeasonDetails } from "@/hooks/series/useSeriesSeasonDetails.hook";
+import { SeriesSeasonComponent } from "./seriesSeason.component";
 
 export const SeriesBodyInfoComponent = ({
   selectedSeries,
@@ -17,13 +17,11 @@ export const SeriesBodyInfoComponent = ({
         <div className="mb-6 space-y-3">
           <div className="flex flex-wrap gap-4 text-sm text-gray-300">
             <span className="font-semibold bg-gray-800 px-3 py-1 rounded">
-              Year: {new Date(seriesDetails.first_air_date).getFullYear()}
+              {new Date(seriesDetails.first_air_date).getFullYear()}
             </span>
+
             <span className="font-semibold bg-gray-800 px-3 py-1 rounded">
-              Duration: {seriesDetails.episode_run_time} min
-            </span>
-            <span className="font-semibold bg-gray-800 px-3 py-1 rounded">
-              Rating: {seriesDetails.vote_average?.toFixed(1)}/10
+              {seriesDetails.vote_average?.toFixed(1)}/10
             </span>
           </div>
         </div>
@@ -78,13 +76,12 @@ export const SeriesBodyInfoComponent = ({
             </div>
           </div>
         </div>
-      ) : seriesDetails ? (
-        <div className="mt-6">
-          <div className="text-gray-400 text-sm">
-            No cast information available
-          </div>
-        </div>
       ) : null}
+
+      <SeriesSeasonComponent
+        selectedSeries={selectedSeries}
+        seriesDetails={seriesDetails}
+      />
     </div>
   );
 };
