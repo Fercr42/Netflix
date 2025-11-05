@@ -162,9 +162,9 @@ export const NetflixLandingComponent = () => {
           <div className="w-full max-w-5xl max-h-[90vh] bg-black rounded-lg relative text-white overflow-y-auto">
             <button
               onClick={() => setIsModalMovieOpen(false)}
-              className="absolute  z-50 top-4 right-0 hover:text-gray-700 text-2xl font-bold text-white"
+              className="absolute  z-50 top-4 right-0 hover:text-gray-700 text-2xl font-bold border-2 border-red-600 text-white p-2 rounded-full "
             >
-              ×
+              X
             </button>
 
             <MovieHeaderInfoComponent selectedMovie={selectedMovie} />
@@ -183,9 +183,9 @@ export const NetflixLandingComponent = () => {
           <div className="w-full max-w-5xl max-h-[90vh] bg-black rounded-lg relative text-white overflow-y-auto">
             <button
               onClick={() => setIsModalSeriesOpen(false)}
-              className="absolute  z-50 top-4 right-0   hover:text-gray-700 text-2xl font-bold text-white"
+              className="absolute  z-50 top-4 right-0   hover:text-gray-700 text-2xl font-bold border-2 border-red-600 text-white p-2 rounded-full "
             >
-              ×
+              X
             </button>
 
             <SeriesHeaderInfoComponent selectedSeries={selectedSeries} />
