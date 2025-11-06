@@ -86,7 +86,7 @@ export const NetflixLandingComponent = () => {
       !selectedMovieId &&
       !selectedSeriesId
     ) {
-      setSelectedMovieId(157336);
+      setSelectedMovieId(13);
     }
   }, [isLoadingEverything]);
 

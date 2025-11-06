@@ -102,3 +102,11 @@ describe("Movie Details Display Test", () => {
     ).toBeInTheDocument();
   });
 });
+
+
+
+
+
+
+
+    
