@@ -1,0 +1,14 @@
+export * from "./movies/movieHeaderInfo.component";
+export * from "./movies/movieBodyInfo.component";
+export * from "./movies/movieGenres.component";
+export * from "./movies/movieOverView.component";
+export * from "./movies/movieSwiper.component";
+export * from "./movies/movieCard.component";
+export * from "./movies/netflixLanding.component";
+export * from "./series/seriesSwiper.component";
+export * from "./series/seriesCard.component";
+export * from "./series/seriesOverview.component";
+export * from "./series/seriesHeaderInfo.component";
+export * from "./series/seriesBodyInfo.component";
+export * from "./series/seriesGender.component";
+
